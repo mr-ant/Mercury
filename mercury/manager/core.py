@@ -6,8 +6,9 @@ import maya.OpenMayaUI as omui
 from maya import cmds
 from shiboken2 import wrapInstance
 from mercury.Qt import QtWidgets
+from mercury.conf import settings
 
-DIRECTORY = os.path.join(cmds.internalVar(userAppDir=True), 'Mercury')
+DIRECTORY = settings.WORK_ON_DIR
 
 
 def maya_main_window():
