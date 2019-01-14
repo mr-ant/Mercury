@@ -4,7 +4,7 @@ import pprint
 from maya import cmds
 
 from PySide2 import QtWidgets, QtCore, QtGui
-from core import maya_main_window, ManagerFiles
+from .core import maya_main_window, ManagerFiles
 
 
 class MainUI(QtWidgets.QDialog):
@@ -30,8 +30,8 @@ class MainUI(QtWidgets.QDialog):
 
         self.saveNameField = QtWidgets.QLineEdit()
         saveLayout.addWidget(self.saveNameField)
-        saveBtn = QtWidgets.QPushButton('Save')
 
+        saveBtn = QtWidgets.QPushButton('Save')
         saveBtn.clicked.connect(self.save)
         saveLayout.addWidget(saveBtn)
 
