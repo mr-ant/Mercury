@@ -32,13 +32,15 @@ class ManagerFiles(dict):
         :return:None
         """
 
+        path = os.path.join(directory, '%s.ma' % name)
         self.generating_data(name, thumbnail, directory, **info)
 
         if cmds.ls(selection=True):
             # 如果选择了文件，则执行导出文件。
-            cmds.file(force=True, exportSelected=True)
+            cmds.file(path, force=True, exportSelected=True, type="mayaAscii")
         else:
             # 否则，直接强制保存当前文件。
+            cmds.file(rename=path)
             cmds.file(save=True, force=True)
 
     def generating_data(self, name, thumbnail=True, directory=DIRECTORY, **info):
@@ -50,8 +52,6 @@ class ManagerFiles(dict):
             info['thumbnail'] = self.saveThumbnail(name, directory=directory)
         info['name'] = name
         info['path'] = path
-
-        cmds.file(rename=path)
 
         with open(json_file, 'w') as f:
             json.dump(info, f, indent=True)
