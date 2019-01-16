@@ -47,7 +47,15 @@ class MainUI(QtWidgets.QDialog):
         btnLayout = QtWidgets.QHBoxLayout(btnWidget)
         layout.addWidget(btnWidget)
 
-        importBtn = QtWidgets.QPushButton("Import!")
+        openBtn = QtWidgets.QPushButton("Open")
+        openBtn.clicked.connect(self.open_file)
+        btnLayout.addWidget(openBtn)
+
+        refBtn = QtWidgets.QPushButton("Reference")
+        refBtn.clicked.connect(self.reference)
+        btnLayout.addWidget(refBtn)
+
+        importBtn = QtWidgets.QPushButton("Import")
         importBtn.clicked.connect(self.load)
         btnLayout.addWidget(importBtn)
 
@@ -66,12 +74,24 @@ class MainUI(QtWidgets.QDialog):
         加载文件
         :return: None
         """
+        name = self.get_current_item()
+        self.library.load(name)
+
+    def get_current_item(self):
         currentItem = self.listWidget.currentItem()
         if not currentItem:
-            return
+            return KeyError('Not Exist')
 
         name = currentItem.text()
-        self.library.load(name)
+        return name
+
+    def open_file(self):
+        name = self.get_current_item()
+        self.library.open(name)
+
+    def reference(self):
+        name = self.get_current_item()
+        self.library.reference(name)
 
     def save(self):
         """

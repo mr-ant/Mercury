@@ -56,9 +56,17 @@ class ManagerFiles(dict):
         with open(json_file, 'w') as f:
             json.dump(info, f, indent=True)
 
+    def open(self, name):
+        path = self[name]['path']
+        cmds.file(path, force=True, open=True)
+
+    def reference(self, name):
+        path = self[name]['path']
+        cmds.file(path, reference=True, namespace=name)
+
     def find(self, directory=DIRECTORY):
         """
-        查找指定文件夹下的左右文件
+        查找指定文件夹下的所有文件
         :param directory: 文件路径
         :return: None
         """
