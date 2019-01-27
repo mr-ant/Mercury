@@ -2,19 +2,11 @@
 import os
 import json
 
-import maya.OpenMayaUI as omui
 from maya import cmds
-from shiboken2 import wrapInstance
-from mercury.Qt import QtWidgets
+
 from mercury.conf import settings
 
 DIRECTORY = settings.WORK_ON_DIR
-
-
-def maya_main_window():
-    win = omui.MQtUtil_mainWindow()
-    ptr = wrapInstance(long(win), QtWidgets.QMainWindow)
-    return ptr
 
 
 class ManagerFiles(dict):
