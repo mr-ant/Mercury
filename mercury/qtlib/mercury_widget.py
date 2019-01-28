@@ -3,17 +3,18 @@ import pprint
 
 from maya import cmds
 
-from PySide2 import QtWidgets, QtCore, QtGui
-from .core import maya_main_window, ManagerFiles
+from mercury.qtlib import QtWidgets, QtCore, QtGui
+from mercury.qtlib import maya_main_window
+from mercury.mayalib import ManagerFiles
 
 
-class MainUI(QtWidgets.QDialog):
+class MercuryWidget(QtWidgets.QDialog):
     """
     这个用来显示控制器面板
     """
 
     def __init__(self, parent=maya_main_window()):
-        super(MainUI, self).__init__(parent)
+        super(MercuryWidget, self).__init__(parent)
 
         self.setWindowTitle("Mercury File Manager for Maya")
         # 移除问号。
@@ -21,6 +22,7 @@ class MainUI(QtWidgets.QDialog):
         self.library = ManagerFiles()
 
         self.buildUI()
+        self.show()
 
     def buildUI(self):
         layout = QtWidgets.QVBoxLayout(self)

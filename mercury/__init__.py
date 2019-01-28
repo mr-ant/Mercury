@@ -1,3 +1,3 @@
-from manager.ui import MainUI
+from mercury.main import main
 
-ui = MainUI()
+from mercury.mayalib import isMaya
